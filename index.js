@@ -2,9 +2,9 @@ const express = require('express')
 const PORT = process.env.PORT||3500
 const mongoose = require('mongoose')
 const authRouter = require('./authRouter')
-
+const cookieParser = require('cookie-parser')
 const app = express()
-
+app.use(cookieParser());
 app.use(express.json());
 app.use('/auth', authRouter)
 
