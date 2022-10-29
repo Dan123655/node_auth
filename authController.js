@@ -2,6 +2,10 @@ const User = require('./models/User')
 const Role = require('./models/Role')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const express = require('express')
+const cookieParser = require('cookie-parser')
+const app = express()
+app.use(cookieParser());
 const { validationResult } = require('express-validator') //returns validation errors
 const {secret} = require('./config')
 const generateAccessToken = (id, roles) => {
@@ -27,7 +31,8 @@ class authController {
             return res.json({message:'user registered successfully'})
         } catch (e) {  
             console.log(e)
-            res.status(400).json({message:'reg error'})
+            res.status(400).json({ message: 'reg error' })
+        
         }
     }
     async login(req,res) {
@@ -38,24 +43,49 @@ class authController {
             const validPassword = bcrypt.compareSync(password, user.password)
             if (!validPassword) { return res.status(400).json({ message: `incorrect password` }) }
             const token = generateAccessToken(user._id, user.roles)
-            return res.json({token})
+            res.cookie('session', `${user._id}`)
+                // .send(`${user._id}`)
+            return res.json({ token })
+            
         }catch (e) {
             console.log(e)
-            res.status(400).json({message:'login error'})
-        }
-    }
-    async getUsers(req,res) {
-        try {
-            // const userRole = new Role()
-            // const adminRole = new Role({ value: 'ADMIN' })
-            // await userRole.save()
-            // await adminRole.save()
-            // //now browse collections on cloud.mongodb and delete
-            const users = await User.find()
-            res.json(users)
-        }catch (e) {
+            res.status(400).json({ message: 'login error' })
             
         }
+    }
+    // async getUsers(req,res) {
+    //     try {
+    //         // const userRole = new Role()
+    //         // const adminRole = new Role({ value: 'ADMIN' })
+    //         // await userRole.save()
+    //         // await adminRole.save()
+    //         // //now browse collections on cloud.mongodb and delete
+    //         const users = await User.find()
+    //         res.json(users)
+    //     }catch (e) {
+            
+    //     }
+    // }
+    async getTasks(req, res) {
+        try {
+            
+            console.log('tasks ok')
+            
+            
+                const id = '635b0ddcc618de490b6cad1b';
+                User.findById(id, function (err, docs) {
+                    if (err){
+                        console.log(err);
+                    }
+                    else {
+                        res.send(JSON.parse(docs.tasks[0][0]))
+                    
+                    }
+                });
+        
+        } catch (e) {
+            console.log(e)
+         }
     }
 };
 module.exports = new authController()
