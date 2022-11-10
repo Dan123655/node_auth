@@ -9,9 +9,8 @@ const controller = require("./authController");
 
 app.use(cors({ credentials: true }));
 
-router.post("/dashboard", controller.dashboard);
 const { check } = require("express-validator");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
 router.post(
   "/registration",
@@ -27,5 +26,6 @@ router.post(
 router.post("/login", controller.login);
 // router.get('/users', roleMiddleware(['ADMIN']), controller.getUsers)
 router.get("/tasks", controller.getTasks);
+router.get("/update", controller.updateTasks);
 
 module.exports = router;

@@ -3,13 +3,34 @@ const Role = require("./models/Role");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const express = require("express");
+const cookieParser = require('cookie-parser')
 
 const cors = require("cors");
 
 const app = express();
+app.use(cors({
+
+  methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'HEAD'], 
+
+  'Access-Control-Allow-Credentials': true,
+  'Access-Control-Allow-Origin': 'http://localhost:3000',
+  'Access-Control-Allow-methods': '*',
+  origin: [
+    "http://localhost:3000",
+
+  ],
+
+  exposedHeaders: ["set-cookie"],
+  credentials: true, 
+  maxAge: 864000, 
+  exposedHeaders: ['*', 'Authorization','Set-Cookie' ] 
+}));
+
+
 
 const { validationResult } = require("express-validator");
 const { secret } = require("./config");
+const { findById } = require("./models/User");
 
 const generateAccessToken = (id) => {
   const payload = { id };
@@ -26,7 +47,9 @@ class authController {
       const { username, password } = req.body;
       const candidate = await User.findOne({ username });
       if (candidate) {
-        res.status(400).json({ message: "username already exists" });
+        res.status(400).json({
+          message: "username already exists"
+        });
       }
       const hashPassword = bcrypt.hashSync(password, 7);
       const userRole = await Role.findOne({ value: "USER" });
@@ -34,9 +57,12 @@ class authController {
         username,
         password: hashPassword,
         roles: [userRole.value],
+        tasks:"[]"
       });
       await user.save();
-      return res.json({ message: "user registered successfully" });
+      return res.json({
+        message: "user registered successfully",
+      success:true });
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "reg error" });
@@ -64,6 +90,13 @@ class authController {
     }
   }
 
+
+
+
+
+
+
+
   async getTasks(req, res) {
     try {
       const token = req.headers.authorization;
@@ -83,14 +116,64 @@ class authController {
         if (err) {
           return res.json({ message: "tasks query error" });
         } else {
-          const yourTasks = JSON.parse(docs.tasks[0]);
+          const dbtasks = docs.tasks;
+          console.log(JSON.parse(dbtasks));
+          res.json({ upd: dbtasks });
           console.log("tasks sent to the user");
-          return res.send(yourTasks);
+          // return res.send({tasks:dbtasks });
         }
       });
     } catch (e) {
       console.log(e);
+      res.json({error:'bad_token'})
     }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  async updateTasks(req, res) {
+    try {
+      const token = req.headers.authorization;
+      // console.log(token); //ok
+      if (!token) {
+        return res.json({ message: "no token here" });
+      }
+      const credentials = jwt.verify(token, secret);
+      // console.log(credentials); //ok
+      if (!credentials) {
+        console.log(err + " or no err");
+        return res.json({ message: "ya token bad man" });
+      }
+
+      const tasksForUpdate = req.headers.tasks;
+      const upsertOptions = { new: true, upsert: true }
+
+      const id = credentials.id
+      const user = await User.findOneAndUpdate({ _id: id }, { tasks: tasksForUpdate }, upsertOptions)
+      console.log(user.tasks);
+ 
+   
+      if (user.tasks) { res.json({ message: 'cloud storage up to date' }) }
+   
+    
+
+
+
+      // res.json(user.tasks)
+  
+    } catch (e) { console.log(e); res.json({message:'bad_token'})}
+
+
   }
 }
 module.exports = new authController();

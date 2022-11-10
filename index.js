@@ -5,7 +5,7 @@ const authRouter = require("./authRouter");
 
 const cors = require("cors");
 const app = express();
-app.use(cors({ credentials: "true" }));
+app.use(cors({ credentials: "include" }));
 
 app.use(express.json());
 app.use("/auth", authRouter);
