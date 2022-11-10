@@ -13,7 +13,7 @@ app.use(cors({
   methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'HEAD'], 
 
   'Access-Control-Allow-Credentials': true,
-  'Access-Control-Allow-Origin': 'http://localhost:3000',
+  'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-methods': '*',
   origin: [
     "http://localhost:3000",
