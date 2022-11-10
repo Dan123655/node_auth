@@ -57,7 +57,6 @@ class authController {
         username,
         password: hashPassword,
         roles: [userRole.value],
-        tasks:"[]"
         
 
 
