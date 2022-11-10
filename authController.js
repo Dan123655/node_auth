@@ -14,16 +14,16 @@ app.use(cors({
 
   'Access-Control-Allow-Credentials': true,
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-methods': '*',
-  origin: [
+ 
+  origin: ['https://node-auth-seven.vercel.app','https://dan123655.github.io/taskman_db'
     
 
   ],
 
-  exposedHeaders: ["set-cookie"],
+
   credentials: true, 
   maxAge: 864000, 
-  exposedHeaders: ['*', 'Authorization','Set-Cookie' ] 
+
 }));
 
 
@@ -65,7 +65,9 @@ class authController {
       success:true });
     } catch (e) {
       console.log(e);
-      res.status(400).json({ error: "registration error. try again later" });
+      res.status(400).json({
+        error: "registration error. try again later",
+    e:e  });
     }
   }
 

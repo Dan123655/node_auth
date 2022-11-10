@@ -7,7 +7,23 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 const controller = require("./authController");
 
-app.use(cors({ credentials: true }));
+app.use(cors({
+
+  methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'HEAD'], 
+
+  'Access-Control-Allow-Credentials': true,
+  'Access-Control-Allow-Origin': '*',
+ 
+  origin: ['https://node-auth-seven.vercel.app','https://dan123655.github.io/taskman_db'
+    
+
+  ],
+
+
+  credentials: true, 
+  maxAge: 864000, 
+
+}));
 
 const { check } = require("express-validator");
 // const jwt = require("jsonwebtoken");
