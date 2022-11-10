@@ -42,13 +42,13 @@ class authController {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(400).json({ message: "reg errors", errors });
+        return res.status(400).json({ validation: "reg errors", errors });
       }
       const { username, password } = req.body;
       const candidate = await User.findOne({ username });
       if (candidate) {
         res.status(400).json({
-          message: "username already exists"
+          exists: "username already exists"
         });
       }
       const hashPassword = bcrypt.hashSync(password, 7);
@@ -65,9 +65,12 @@ class authController {
       success:true });
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: "reg error" });
+      res.status(400).json({ error: "registration error. try again later" });
     }
   }
+
+
+
   async login(req, res) {
     try {
       const { username, password } = req.body;
@@ -75,18 +78,20 @@ class authController {
       if (!user) {
         return res
           .status(400)
-          .json({ message: `user ${username} was not found` });
+          .json({
+            notfound: `user ${username} was not found`,
+          username:username  });
       }
       const validPassword = bcrypt.compareSync(password, user.password);
       if (!validPassword) {
-        return res.status(400).json({ message: `incorrect password` });
+        return res.status(400).json({ incorrect: `incorrect password` });
       }
       const token = generateAccessToken(user._id);
 
       return res.json({ token });
     } catch (e) {
       console.log(e);
-      res.status(500).json({ message: "login error" });
+      res.status(500).json({ error: "login error" });
     }
   }
 
