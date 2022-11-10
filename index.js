@@ -9,7 +9,9 @@ app.use(cors({ credentials: "include" }));
 
 app.use(express.json());
 app.use("/api", authRouter);
-
+app.get("/", (req, res) => {
+    res.send("Express on Vercel");
+  });
 const start = async () => {
 
     try {
