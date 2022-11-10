@@ -70,7 +70,7 @@ class authController {
     } catch (e) {
       console.log(e);
       res.status(400).json({
-        message: "registration error. try again later",
+        error: "registration error. try again later",
     e:e  });
     }
   }
@@ -85,12 +85,12 @@ class authController {
         return res
           .status(400)
           .json({
-            notfound: `user ${username} was not found`,
+            message: `user ${username} was not found`,
           username:username  });
       }
       const validPassword = bcrypt.compareSync(password, user.password);
       if (!validPassword) {
-        return res.status(400).json({ incorrect: `incorrect password` });
+        return res.status(400).json({ message: `incorrect password` });
       }
       const token = generateAccessToken(user._id);
 
