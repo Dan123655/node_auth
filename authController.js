@@ -1,4 +1,5 @@
 const User = require("./models/User");
+const Tasks = require("./models/Tasks");
 const Role = require("./models/Role");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -53,10 +54,12 @@ class authController {
       }
       const hashPassword = bcrypt.hashSync(password, 7);
       const userRole = await Role.findOne({ value: "USER"});
+      const userTasks = await Tasks.findOne({ tasks: "[]"});
       const user = new User({
         username,
         password: hashPassword,
         roles: [userRole.value],
+        tasks:[userTasks.tasks]
 
       });
       await user.save();
