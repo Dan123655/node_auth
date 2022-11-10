@@ -16,7 +16,7 @@ app.use(cors({
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-methods': '*',
   origin: [
-    "http://localhost:3000",
+    
 
   ],
 
