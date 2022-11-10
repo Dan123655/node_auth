@@ -64,7 +64,7 @@ class authController {
       await user.save();
 
       
-      await User.findOneAndUpdate({ username: username }, { tasks: '[]' }, { new: true, upsert: true })
+      // await User.findOneAndUpdate({ username: username }, { tasks: '[]' }, { new: true, upsert: true })
       return res.json({
         message: "user registered successfully, no tasks",
       success:true });
