@@ -10,12 +10,12 @@ app.use(cors({
     methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'HEAD'], 
   
     'Access-Control-Allow-Credentials': true,
-    'Access-Control-Allow-Origin': 'https://dan123655.github.io/taskman_db',
+    'Access-Control-Allow-Origin': 'https://dan123655.github.io',
    
-    // origin: ['https://node-auth-seven.vercel.app','https://dan123655.github.io/taskman_db'
+    origin: ['https://node-auth-seven.vercel.app','https://dan123655.github.io'
       
   
-    // ],
+    ],
   
   
     credentials: true, 
