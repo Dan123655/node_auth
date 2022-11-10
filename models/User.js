@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose')
 const User = new Schema({
     username: { type: String, unique: true, required: true },
     password: { type: String, required: true },
-    tasks: [{type: String, ref:'Tasks'}],
-    roles: [{ type: String, ref: 'Role' }]
+    roles: [{ type: String, ref: 'Role' }],
+    tasks:[{type:String, unique:false}]
 })
 module.exports = model('User', User)
