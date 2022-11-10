@@ -58,7 +58,7 @@ class authController {
         username,
         password: hashPassword,
         roles: [userRole.value],
-        tasks: [userRole.tasks],
+        tasks: "[]",
       });
       await user.save();
       return res.json({
