@@ -56,15 +56,17 @@ class authController {
       const user = new User({
         username,
         password: hashPassword,
-        roles: [userRole.value],
-        tasks:'[]'
+        roles: [userRole.value]
         
 
 
       });
       await user.save();
+
+      
+      await User.findOneAndUpdate({ username: username }, { tasks: '[]' }, { new: true, upsert: true })
       return res.json({
-        message: "user registered successfully",
+        message: "user registered successfully, no tasks",
       success:true });
     } catch (e) {
       console.log(e);
