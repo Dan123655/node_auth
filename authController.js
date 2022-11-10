@@ -52,12 +52,11 @@ class authController {
         });
       }
       const hashPassword = bcrypt.hashSync(password, 7);
-      const userRole = await Role.findOne({ value: "USER",tasks:"[]" });
+      const userRole = await Role.findOne({ value: "USER"});
       const user = new User({
         username,
         password: hashPassword,
         roles: [userRole.value],
-        tasks:[userRole.tasks]
 
       });
       await user.save();
