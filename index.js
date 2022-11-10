@@ -1,18 +1,19 @@
-const express = require('express')
-const PORT = process.env.PORT||3500
-const mongoose = require('mongoose')
-const authRouter = require('./authRouter')
+const express = require("express");
+const PORT = process.env.PORT||3500;
+const mongoose = require("mongoose");
+const authRouter = require("./authRouter");
 
-const app = express()
+const cors = require("cors");
+const app = express();
+app.use(cors({ credentials: "include" }));
 
 app.use(express.json());
-app.use('/auth', authRouter)
-
+app.use("/api", authRouter);
 
 const start = async () => {
 
     try {
-        await mongoose.connect(`mongodb+srv://node_user:undefined@cluster0.d5adm64.mongodb.net/?retryWrites=true&w=majority`)
+        await mongoose.connect(`mongodb+srv://node_user:SFnZZH4eGfuRPMCk@cluster0.d5adm64.mongodb.net/?retryWrites=true&w=majority`)
         app.listen(PORT, () => console.log(`server started on ${PORT}`))
     }
     
