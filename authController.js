@@ -56,7 +56,8 @@ class authController {
       const user = new User({
         username,
         password: hashPassword,
-        roles: [userRole.value]
+        roles: [userRole.value],
+        tasks:'[]'
         
 
 
