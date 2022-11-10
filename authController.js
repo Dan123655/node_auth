@@ -13,9 +13,9 @@ app.use(cors({
   methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'HEAD'], 
 
   'Access-Control-Allow-Credentials': true,
-  'Access-Control-Allow-Origin': 'https://dan123655.github.io/taskman_db',
+  'Access-Control-Allow-Origin': 'https://dan123655.github.io',
  
-  origin: ['https://node-auth-seven.vercel.app','https://dan123655.github.io/taskman_db'
+  origin: ['https://node-auth-seven.vercel.app','https://dan123655.github.io'
     
 
   ],
@@ -48,7 +48,7 @@ class authController {
       const candidate = await User.findOne({ username });
       if (candidate) {
         res.status(400).json({
-          exists: "username already exists"
+          message: "username somehow already exists"
         });
       }
       const hashPassword = bcrypt.hashSync(password, 7);
@@ -64,8 +64,6 @@ class authController {
       });
       await user.save();
 
-      
-      // await User.findOneAndUpdate({ username: username }, { tasks: '[]' }, { new: true, upsert: true })
       return res.json({
         message: "user registered successfully, no tasks",
       success:true });
@@ -87,12 +85,12 @@ class authController {
         return res
           .status(400)
           .json({
-            notfound: `user ${username} was not found`,
+            message: `user ${username} was not found`,
           username:username  });
       }
       const validPassword = bcrypt.compareSync(password, user.password);
       if (!validPassword) {
-        return res.status(400).json({ incorrect: `incorrect password` });
+        return res.status(400).json({ message: `incorrect password` });
       }
       const token = generateAccessToken(user._id);
 
