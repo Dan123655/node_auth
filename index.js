@@ -22,9 +22,9 @@ app.use(cors({
 
 app.use(express.json());
 app.use("/api", authRouter);
-// app.get("/", (req, res) => {
-//     res.send("Express on Vercel");
-//   });
+app.get("/", (req, res) => {
+    res.send("Express on Vercel");
+  });
 const start = async () => {
 
     try {
