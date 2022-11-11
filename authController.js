@@ -14,9 +14,6 @@ app.use(cors({
 
   'Access-Control-Allow-Credentials': true,
   'Access-Control-Allow-Origin': '*',
-
-
-
   credentials: true, 
   maxAge: 864000, 
 
