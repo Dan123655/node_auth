@@ -8,7 +8,12 @@ const cookieParser = require('cookie-parser')
 const cors = require("cors");
 
 const app = express();
-app.use(cors())
+app.use(cors({
+  credentials: true,
+  'Access-Control-Allow-Credentials': true,
+  'Access-Control-Allow-Origin': 'https://dan123655.github.io',
+  origin:'https://dan123655.github.io'
+}))
 
 
 
