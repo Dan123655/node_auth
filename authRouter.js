@@ -7,19 +7,19 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 const controller = require("./authController");
 
-app.use(cors({
+// app.use(cors({
 
-  methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'HEAD'], 
+//   methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'HEAD'], 
 
-  'Access-Control-Allow-Credentials': true,
-  'Access-Control-Allow-Origin': '*',
+//   'Access-Control-Allow-Credentials': true,
+//   'Access-Control-Allow-Origin': '*',
 
 
 
-  credentials: true, 
-  maxAge: 864000, 
+//   credentials: true, 
+//   maxAge: 864000, 
 
-}));
+// }));
 
 const { check } = require("express-validator");
 // const jwt = require("jsonwebtoken");
