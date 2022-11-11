@@ -15,7 +15,7 @@ app.use(cors({
   'Access-Control-Allow-Credentials': true,
   'Access-Control-Allow-Origin': 'https://dan123655.github.io',
  
-  origin: ['https://node-auth-seven.vercel.app','https://dan123655.github.io'
+  origin: ['https://node-auth-seven.vercel.app'
     
 
   ],
@@ -70,7 +70,7 @@ class authController {
     } catch (e) {
       console.log(e);
       res.status(400).json({
-        error: "registration error. try again later",
+        message: "registration error. try again later",
     e:e  });
     }
   }
