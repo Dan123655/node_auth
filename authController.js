@@ -13,7 +13,7 @@ app.use(cors({
   methods: ['GET', 'PUT', 'POST', 'OPTIONS', 'HEAD'], 
 
   'Access-Control-Allow-Credentials': true,
-  'Access-Control-Allow-Origin': 'https://node-auth-seven.vercel',
+  'Access-Control-Allow-Origin': '*',
 
 
 
