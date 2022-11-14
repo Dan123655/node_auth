@@ -33,14 +33,14 @@ class authController {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(400).json({ validation: "reg errors", errors });
+        return res.status(400).json({ incorrect: true }); //done
       }
       const { username, password } = req.body;
       const candidate = await User.findOne({ username });
       if (candidate) {
         res.status(400).json({
-          message: "username somehow already exists"
-        });
+          exists: true
+        });                                                 //done
       }
       const hashPassword = bcrypt.hashSync(password, 7);
       const userRole = await Role.findOne({ value: "USER"});
@@ -61,7 +61,7 @@ class authController {
     } catch (e) {
       console.log(e);
       res.status(400).json({
-        message: "registration error. try again later",
+        regerror: true,
     e:e  });
     }
   }
