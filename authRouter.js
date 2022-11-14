@@ -33,6 +33,6 @@ router.post(
 router.post("/login", controller.login);
 // router.get('/users', roleMiddleware(['ADMIN']), controller.getUsers)
 router.get("/tasks", controller.getTasks);
-router.get("/update", controller.updateTasks);
+router.post("/update", controller.updateTasks);
 
 module.exports = router;
