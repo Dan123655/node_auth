@@ -76,19 +76,19 @@ class authController {
         return res
           .status(400)
           .json({
-            message: `user ${username} was not found`,
-          username:username  });
+            notFound: true,
+          thisUser:username  });
       }
       const validPassword = bcrypt.compareSync(password, user.password);
       if (!validPassword) {
-        return res.status(400).json({ message: `incorrect password` });
+        return res.status(400).json({ wrongpassword: true });    //done
       }
       const token = generateAccessToken(user._id);
 
-      return res.json({ token });
+      return res.json({ token,tokensent:true });       //done
     } catch (e) {
       console.log(e);
-      res.status(500).json({ error: "login error" });
+      res.status(500).json({ error: true});        //done
     }
   }
 
