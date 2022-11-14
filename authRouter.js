@@ -12,7 +12,8 @@ app.use(cors({
   'Access-Control-Allow-Credentials': true,
   // 'Access-Control-Allow-Origin': 'https://dan123655.github.io',
   'Access-Control-Allow-Origin': 'http://localhost:3000',
-  origin:'https://dan123655.github.io'
+  origin: 'http://localhost:3000'
+  // origin: 'https://dan123655.github.io'
 }))
 
 const { check } = require("express-validator");
