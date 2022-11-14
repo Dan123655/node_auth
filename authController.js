@@ -11,8 +11,9 @@ const app = express();
 app.use(cors({
   credentials: true,
   'Access-Control-Allow-Credentials': true,
-  'Access-Control-Allow-Origin': 'https://dan123655.github.io',
-  origin:'https://dan123655.github.io'
+  // 'Access-Control-Allow-Origin': 'https://dan123655.github.io',
+  'Access-Control-Allow-Origin': 'http://localhost:3000',
+  origin: 'https://dan123655.github.io'
 }))
 
 
