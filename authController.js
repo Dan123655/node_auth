@@ -3,8 +3,7 @@ const Role = require("./models/Role");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const express = require("express");
-const cookieParser = require('cookie-parser')
-
+const bodyParser = require('body-parser')
 const cors = require("cors");
 
 const app = express();
@@ -145,6 +144,7 @@ class authController {
 
   async updateTasks(req, res) {
     try {
+      console.log(req.body)
       const token = req.headers.authorization;
       // console.log(token); //ok
       if (!token) {
@@ -157,7 +157,8 @@ class authController {
         return res.json({ message: "ya token bad man" });
       }
 
-      const tasksForUpdate = req.headers.tasks;
+      const tasksForUpdate = await req.body.newTasks;
+      // console.log(tasksForUpdate)
       const upsertOptions = { new: true, upsert: true }
 
       const id = credentials.id
