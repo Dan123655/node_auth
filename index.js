@@ -12,7 +12,7 @@ app.use(cors({
     'Access-Control-Allow-Origin': 'https://dan123655.github.io',
     // 'Access-Control-Allow-Origin': 'http://localhost:3000',
     // origin: 'http://localhost:3000'
-    origin: 'https://dan123655.github.io'
+    origin: 'https://dan123655.github.io/'
   }))
 
 app.use(express.json());
