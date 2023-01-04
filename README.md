@@ -1,8 +1,1 @@
-a server that allows registration, login with user database access control (admin/user rights)
-
-mongoose,
-jwt,
-express-validator
-
-npm i
-npm start
+node js/express application for https://dan123655.github.io/taskman/
