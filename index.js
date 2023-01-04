@@ -1,3 +1,4 @@
+import key from "./key";
 const express = require("express");
 const PORT = process.env.PORT||3500;
 const mongoose = require("mongoose");
@@ -8,10 +9,10 @@ const app = express();
 app.use(cors({
     credentials: true,
     'Access-Control-Allow-Credentials': true,
-    // 'Access-Control-Allow-Origin': 'https://dan123655.github.io',
-    'Access-Control-Allow-Origin': 'http://localhost:3000',
-    origin: 'http://localhost:3000'
-    // origin: 'https://dan123655.github.io'
+    'Access-Control-Allow-Origin': 'https://dan123655.github.io',
+    // 'Access-Control-Allow-Origin': 'http://localhost:3000',
+    // origin: 'http://localhost:3000'
+    origin: 'https://dan123655.github.io'
   }))
 
 app.use(express.json());
@@ -22,7 +23,7 @@ app.use("/api", authRouter);
 const start = async () => {
 
     try {
-        await mongoose.connect(`mongodb+srv://node_user:SFnZZH4eGfuRPMCk@cluster0.d5adm64.mongodb.net/?retryWrites=true&w=majority`)
+        await mongoose.connect(key)
         app.listen(PORT, () => console.log(`server started on ${PORT}`))
     }
     
