@@ -4,17 +4,17 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const express = require("express");
 const bodyParser = require('body-parser')
-const cors = require("cors");
+// const cors = require("cors");
 
 const app = express();
-app.use(cors({
-  credentials: true,
-  'Access-Control-Allow-Credentials': true,
-  'Access-Control-Allow-Origin': 'https://dan123655.github.io/taskman_db',
-  // 'Access-Control-Allow-Origin': 'http://localhost:3000',
-  // origin: 'http://localhost:3000'
-  origin: 'https://dan123655.github.io/taskman_db/'
-}))
+// app.use(cors({
+//   credentials: true,
+//   'Access-Control-Allow-Credentials': true,
+//   'Access-Control-Allow-Origin': 'https://dan123655.github.io/taskman_db',
+//   // 'Access-Control-Allow-Origin': 'http://localhost:3000',
+//   // origin: 'http://localhost:3000'
+//   origin: 'https://dan123655.github.io/taskman_db/'
+// }))
 
 
 
