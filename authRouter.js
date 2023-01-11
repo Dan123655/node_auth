@@ -9,8 +9,6 @@ const controller = require("./authController");
 
 
 const { check } = require("express-validator");
-// const jwt = require("jsonwebtoken");
-
 router.post(
   "/registration",
   [
@@ -23,6 +21,7 @@ router.post(
   controller.registration
 );
 router.post("/login", controller.login);
+//optional
 // router.get('/users', roleMiddleware(['ADMIN']), controller.getUsers)
 router.get("/tasks", controller.getTasks);
 router.post("/update", controller.updateTasks);
