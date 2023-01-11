@@ -12,7 +12,7 @@ app.use("/api", authRouter);
 const start = async () => {
 
     try {
-        await mongoose.connect('mongodb+srv://almanac:080356almanac@cluster0.m7wffkp.mongodb.net/almanac?retryWrites=true&w=majority')
+        await mongoose.connect(`${myKey}`)
         app.listen(PORT, () => console.log(`server started on ${PORT}`))
     }
     
